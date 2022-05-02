@@ -1,0 +1,27 @@
+{
+	"name": "facturacion-cli",
+	"version": "1.0.0",
+	"description": "CLI to make invoices in AFIP automaticly",
+	"main": "bin/index.js",
+	"scripts": {
+		"start": "node bin/index.js",
+		"cli:install": "npm install -g .",
+		"cli:uninstall": "npm uninstall -g facturacion-desktop"
+	},
+	"bin": {
+		"facturacion-cli": "./bin/index.js"
+	},
+	"author": "",
+	"license": "MIT",
+	"dependencies": {
+		"@afipsdk/afip.js": "^0.7.1",
+		"boxen": "^4.0.0",
+		"chalk": "^2.4.2",
+		"dotenv": "^10.0.0",
+		"moment": "^2.29.1",
+		"yargs": "^13.2.4"
+	},
+	"keywords": [
+		"cli"
+	]
+}
