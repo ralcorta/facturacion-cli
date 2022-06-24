@@ -1,10 +1,10 @@
 const moment = require('moment');
-const afipFactory = require('./afip-owner');
+const afipFactory = require('./afip/afip.factory');
 const chalk = require('chalk');
 
 module.exports = async function createBill(amount, price, afipOpt = {}) {
 	if (price > 5000) throw new Error('[StrictValidation] The price of invoices must be less than $5.0000');
-	if (price < 0) throw new Error('[StrictValidation] The price of invoices must be higher than $5.0000');
+	if (price < 0) throw new Error('[StrictValidation] The price of invoices must be higher than $0');
 
 	if (amount > 20)
 		throw new Error(

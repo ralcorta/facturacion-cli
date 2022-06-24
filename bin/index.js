@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 
 const yargs = require('yargs');
-const createBillCmd = require('../src/commands/create-bill-cmd');
+const createBillCmd = require('../src/commands/bill-create-cmd');
 const infoBillCmd = require('../src/commands/info-bill-cmd');
 const pjson = require('../package.json');
 const chalk = require('chalk');

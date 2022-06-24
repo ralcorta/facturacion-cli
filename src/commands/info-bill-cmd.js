@@ -1,7 +1,7 @@
-const getBill = require('../get-bill');
+const getBill = require('../bill-get');
 const chalk = require('chalk');
 
-module.exports = async function(yargs) {
+module.exports = async function (yargs) {
 	const options = yargs
 		.usage('usage: $0 info [options]')
 		.option('i', { alias: 'invoice', describe: 'Invoice number', type: 'number', demandOption: true })

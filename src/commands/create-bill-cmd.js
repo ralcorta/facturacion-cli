@@ -1,4 +1,4 @@
-const createBill = require('../create-bill');
+const createBill = require('../bill-create');
 const chalk = require('chalk');
 const boxen = require('boxen');
 require('dotenv').config();
