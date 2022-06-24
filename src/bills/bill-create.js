@@ -1,6 +1,6 @@
 const moment = require('moment');
-const afipFactory = require('./afip/afip.factory');
-const chalk = require('chalk');
+const afipFactory = require('../afip/afip.factory');
+const loger = require('../loger');
 
 module.exports = async function createBill(amount, price, afipOpt = {}) {
 	if (price > 5000) throw new Error('[StrictValidation] The price of invoices must be less than $5.0000');
@@ -41,7 +41,7 @@ module.exports = async function createBill(amount, price, afipOpt = {}) {
 		};
 
 		const res = await afipFactory(afipOpt).ElectronicBilling.createNextVoucher(data, true);
-		console.log(chalk.cyan.bold(`[AFIP] Invoice ${i + 1} created.`));
+		loger.info(`[AFIP] Invoice ${i + 1} created.`)
 		vouchers.push(res);
 	}
 	return vouchers;

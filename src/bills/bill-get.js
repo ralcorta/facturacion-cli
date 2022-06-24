@@ -1,4 +1,4 @@
-const afipFactory = require('./afip/afip.factory');
+const afipFactory = require('../afip/afip.factory');
 
 module.exports = async function getBill(invoice, salepoint, type, afipOpt = {}) {
 	if (!invoice) throw new Error('[StrictValidation] The invoice parameter must be something');

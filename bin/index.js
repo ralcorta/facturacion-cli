@@ -1,12 +1,12 @@
 #! /usr/bin/env node
 
 const yargs = require('yargs');
-const createBillCmd = require('../src/commands/bill-create-cmd');
-const infoBillCmd = require('../src/commands/info-bill-cmd');
+const createBillCmd = require('../src/commands/cmd-create-bill');
+const infoBillCmd = require('../src/commands/cmd-info-bill');
 const pjson = require('../package.json');
-const chalk = require('chalk');
-console.log(chalk.green.bold(`[CLI] Version: ${pjson.version}`));
-// const boxen = require('boxen');
+const loger = require('../src/loger')
+
+loger.success(`[CLI] Version: ${pjson.version}`)
 
 // const boxenOptions = {
 // 	padding: 1,

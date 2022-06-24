@@ -1,6 +1,8 @@
-const createBill = require('../bill-create');
+const createBill = require('../bills/bill-create');
 const chalk = require('chalk');
 const boxen = require('boxen');
+const loger = require('../loger');
+const BaseError = require('../error');
 require('dotenv').config();
 
 const boxenOptions = {
@@ -27,8 +29,8 @@ module.exports = async function (yargs) {
 		.wrap(null).argv;
 
 	try {
-		console.log(chalk.yellow.bold(`[AFIP] Environment: ${options.prod ? 'Production' : 'Testing'}`));
-		console.log(chalk.blue.bold(`[AFIP] Generating ${options.n} invoices of $${options.p} ...`));
+		loger.warn(`[AFIP] Environment: ${options.prod ? 'Production' : 'Testing'}`)
+		loger.blue(`[AFIP] Generating ${options.n} invoices of $${options.p} ...`)
 		const conf = {
 			production: options.prod,
 			res_folder: process.env.RES_FOLDER,
@@ -37,17 +39,11 @@ module.exports = async function (yargs) {
 			CUIT: process.env.CUIT
 		};
 		const bills = await createBill(options.n, options.p, conf);
-		console.log(
-			boxen(
-				chalk.green.bold(`[AFIP] ${options.n} invoices created. Total: $${options.n * options.p}`),
-				boxenOptions
-			)
-		);
+		loger.success(`[AFIP] ${options.n} invoices created. Total: $${options.n * options.p}`)
 		if (options.s) {
-			console.dir(bills, { depth: 50 });
+			loger.dir(bills)
 		}
 	} catch (error) {
-		console.log(chalk.red.bold(`[AFIP] ERROR: ${error.message}`));
-		console.log(error);
+		throw new BaseError(`[AFIP] ERROR: ${error.message}`)
 	}
 };

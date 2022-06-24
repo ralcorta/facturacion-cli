@@ -1,5 +1,7 @@
-const getBill = require('../bill-get');
+const getBill = require('../bills/bill-get');
 const chalk = require('chalk');
+const loger = require('../loger');
+const BaseError = require('../error');
 
 module.exports = async function (yargs) {
 	const options = yargs
@@ -18,10 +20,9 @@ module.exports = async function (yargs) {
 
 	try {
 		const voucherInfo = await getBill(options.i, options.s, options.t);
-		console.log(chalk.green.bold(`[AFIP] Invoices info:`));
-		console.log(voucherInfo);
+		loger.success(`[AFIP] Invoices info:`)
+		loger.default(voucherInfo)
 	} catch (error) {
-		console.log(chalk.red.bold(`[AFIP] ERROR: ${error.message}`));
-		console.log(error);
+		throw new BaseError(`[AFIP] ERROR: ${error.message}`)
 	}
 };
