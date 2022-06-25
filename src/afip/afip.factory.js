@@ -1,12 +1,14 @@
 const Afip = require('@afipsdk/afip.js');
-const loger = require('../loger');
 const BaseError = require('../error');
+const config = require('../config');
 
-module.exports = function (config) {
-    const options = config || {};
+module.exports = function (configParam = {}) {
+    const options = {
+        ...config(),
+        ...configParam
+    };
     if (!options.CUIT) {
         const msg = `[AFIP] ERROR: Cuit must be with something.`;
-        loger.error(msg);
         throw new BaseError(msg);
     }
     return new Afip(options);

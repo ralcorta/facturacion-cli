@@ -23,6 +23,6 @@ module.exports = async function (yargs) {
 		loger.success(`[AFIP] Invoices info:`)
 		loger.default(voucherInfo)
 	} catch (error) {
-		throw new BaseError(`[AFIP] ERROR: ${error.message}`)
+		new BaseError(`[AFIP] ERROR: ${error.message}`)
 	}
 };

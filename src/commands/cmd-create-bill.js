@@ -3,15 +3,6 @@ const chalk = require('chalk');
 const boxen = require('boxen');
 const loger = require('../loger');
 const BaseError = require('../error');
-require('dotenv').config();
-
-const boxenOptions = {
-	padding: 1,
-	margin: 1,
-	borderStyle: 'round',
-	borderColor: 'green',
-	backgroundColor: '#555555'
-};
 
 module.exports = async function (yargs) {
 	const options = yargs
@@ -31,19 +22,12 @@ module.exports = async function (yargs) {
 	try {
 		loger.warn(`[AFIP] Environment: ${options.prod ? 'Production' : 'Testing'}`)
 		loger.blue(`[AFIP] Generating ${options.n} invoices of $${options.p} ...`)
-		const conf = {
-			production: options.prod,
-			res_folder: process.env.RES_FOLDER,
-			cert: process.env.CERT,
-			key: process.env.KEY,
-			CUIT: process.env.CUIT
-		};
-		const bills = await createBill(options.n, options.p, conf);
+		const bills = await createBill(options.n, options.p);
 		loger.success(`[AFIP] ${options.n} invoices created. Total: $${options.n * options.p}`)
 		if (options.s) {
 			loger.dir(bills)
 		}
 	} catch (error) {
-		throw new BaseError(`[AFIP] ERROR: ${error.message}`)
+		new BaseError(`[AFIP] ERROR: ${error.message}`)
 	}
 };
