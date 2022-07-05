@@ -9,9 +9,9 @@ module.exports = async function (yargs) {
 		.option('i', { alias: 'invoice', describe: 'Invoice number', type: 'number', demandOption: true })
 		.option('s', { alias: 'salepoint', describe: 'Sale point number', type: 'number', demandOption: true })
 		.option('t', { alias: 'type', describe: 'Type invoice', type: 'number', demandOption: true })
-		.option('prod', {
-			alias: 'production',
-			describe: 'Use production env',
+		.option('test', {
+			alias: 'test',
+			describe: 'Use test env',
 			type: 'boolean',
 			demandOption: false
 		})
@@ -19,7 +19,9 @@ module.exports = async function (yargs) {
 		.wrap(null).argv;
 
 	try {
-		const voucherInfo = await getBill(options.i, options.s, options.t);
+		const voucherInfo = await getBill(options.i, options.s, options.t, {
+			production: !options.test
+		});
 		loger.success(`[AFIP] Invoices info:`)
 		loger.default(voucherInfo)
 	} catch (error) {
