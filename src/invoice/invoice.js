@@ -1,6 +1,5 @@
 const moment = require('moment');
 const afipFactory = require('../afip/afip.factory');
-const loger = require('../loger');
 
 class Invoice {
     CantReg = 1;// Cantidad de comprobantes a registrar
@@ -30,7 +29,7 @@ class Invoice {
     }
 
     async save(afipOpt) {
-        return await afipFactory(afipOpt).ElectronicBilling.createNextVoucher(this, true);
+        return await afipFactory(afipOpt).ElectronicBilling.createNextVoucher({ ...this }, true);
     }
 
     static getLast(options) {
