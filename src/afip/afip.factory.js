@@ -4,13 +4,12 @@ const config = require('../config');
 
 module.exports = function (configParam = {}) {
     const options = {
-        ...config(),
+        ...config().credentials,
         ...configParam
     };
-    if (!options.CUIT) {
-        const msg = `[AFIP] ERROR: Cuit must be with something.`;
-        throw new BaseError(msg);
-    }
+    if (!options.CUIT)
+        throw new BaseError(`[AFIP] ERROR: Cuit param must be completed.`);
+
     return new Afip(options);
 }
 

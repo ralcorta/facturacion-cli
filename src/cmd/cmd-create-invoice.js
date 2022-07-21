@@ -1,4 +1,4 @@
-const createBill = require('../bills/bill-create');
+const createInvoice = require('../invoice/invoice-create');
 const chalk = require('chalk');
 const boxen = require('boxen');
 const loger = require('../loger');
@@ -22,12 +22,12 @@ module.exports = async function (yargs) {
 	try {
 		loger.warn(`[AFIP] Environment: ${options.test ? 'Testing' : 'Production'}`)
 		loger.blue(`[AFIP] Generating ${options.n} invoices of $${options.p} ...`)
-		const bills = await createBill(options.n, options.p, {
+		const invoices = await createInvoice(options.n, options.p, {
 			production: !options.test
 		});
 		loger.success(`[AFIP] ${options.n} invoices created. Total: $${options.n * options.p}`)
 		if (options.s) {
-			loger.dir(bills)
+			loger.dir(invoices)
 		}
 	} catch (error) {
 		new BaseError(`[AFIP] ERROR: ${error.message}`)

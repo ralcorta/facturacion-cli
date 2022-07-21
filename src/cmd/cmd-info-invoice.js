@@ -1,4 +1,4 @@
-const getBill = require('../bills/bill-get');
+const getInvoice = require('../invoice/invoice-get');
 const chalk = require('chalk');
 const loger = require('../loger');
 const BaseError = require('../error');
@@ -19,7 +19,7 @@ module.exports = async function (yargs) {
 		.wrap(null).argv;
 
 	try {
-		const voucherInfo = await getBill(options.i, options.s, options.t, {
+		const voucherInfo = await getInvoice(options.i, options.s, options.t, {
 			production: !options.test
 		});
 		loger.success(`[AFIP] Invoices info:`)
